@@ -1,86 +1,82 @@
 <div align="center">
 
-# 🛡️ ShiftGuard
-### SOC Roster Management • Coverage Assurance • Analyst Well-being
+<img src="assets/shiftguard-banner.svg" alt="ShiftGuard 3.0 SOC Workforce Command Center" width="100%">
 
-**Build a shift roster. Inspect real coverage gaps. Export a clean Excel workbook.**
+### Interactive SOC Workforce Studio · Coverage Diagnostics · Local-first
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge)
-![Excel](https://img.shields.io/badge/Output-XLSX-217346?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-66b3a1?style=for-the-badge)
+[![CI](https://github.com/amitambekar510/ShiftGuard-SOC-Roster-Management/actions/workflows/ci.yml/badge.svg)](https://github.com/amitambekar510/ShiftGuard-SOC-Roster-Management/actions/workflows/ci.yml)
+[![Studio](https://img.shields.io/badge/ShiftGuard-3.0-DFBA67?style=for-the-badge)](studio/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge)](shiftguard.py)
+
+**[Open the interactive studio](https://amitambekar510.github.io/ShiftGuard-SOC-Roster-Management/)** · [Python CLI](#python-roster-generator) · [Coverage explained](#what-does-a-coverage-gap-mean)
 
 </div>
 
-> [!IMPORTANT]
-> **Coverage is evaluated by assigned shift**, not by counting active staff. A team can have analysts on its roster and still have an unstaffed night shift. This tool reports gaps; it cannot guarantee minimum coverage or labor-law compliance.
+## 🎞️ Animated project walkthrough
 
-## Why ShiftGuard?
-Security Operations Centers operate around the clock. ShiftGuard is a Python-based, local-first utility that creates illustrative or user-configured monthly rosters and checks whether each shift has the required number of analysts.
+<div align="center">
+<img src="assets/shiftguard-demo.gif" alt="Animated synthetic demo of shift coverage, roster edits and diagnostics" width="100%">
 
-## ✨ Features
+*Illustrative animation using fictional analysts. Not real SOC staffing data.*
 
-| Capability | What it does |
+<img src="assets/shiftguard-architecture.svg" alt="Local-first architecture diagram: inputs, scheduling, coverage engine, exports" width="100%">
+</div>
+
+## 🚀 What's new in ShiftGuard 3.0?
+
+| Feature | Status |
 |---|---|
-| 🗓️ Monthly schedules | Choose any month and year |
-| 🔁 Shift rotations | Four-day (3-on/1-off) and five-day (3-on/2-off) patterns |
-| 🛡️ Coverage validation | Checks **Morning, Afternoon, and Night** independently for each required role |
-| ⚠️ Gap register | Dedicated sheet listing uncovered shifts and required headcount |
-| 📈 Analyst statistics | Counts assigned mornings, afternoons, nights and rest days |
-| 🧾 Excel delivery | Four worksheets with readable formatting and frozen headings |
-| 🔐 Privacy | Uses synthetic example staff by default; your custom JSON stays local |
+| Interactive, responsive browser roster | Available in `studio/` |
+| Click-to-edit shift assignments | Morning → Afternoon → Night → Off → Leave |
+| Coverage diagnostics | Per day, role, and actual assigned shift |
+| Rest/rotation warnings | Consecutive nights and Night → Morning/Afternoon transitions |
+| Staffing thresholds | Configurable minimum L1 and L2 per shift |
+| Local CSV export | No account or backend |
+| Python Excel generator | Retained from v2; produces 4-sheet XLSX |
+| Demo data | Synthetic analysts only |
 
-## 🚀 Run locally
+> [!IMPORTANT]
+> **The demo's red coverage gaps are warnings about generated example assignments, not evidence that your actual SOC has staffing shortages.** This repository cannot see your real shift roster. Neither the web demo nor Python generator guarantees safe scheduling or legal compliance.
+
+## What does a coverage gap mean?
+
+A **Night ❌ Coverage Gap** occurs when, for example, a Night shift requires **1 L1 analyst**, but **0 L1 analysts** are actually scheduled. This is a **gap in the calculated sample schedule**. It is **not** proof that your organization's real SOC is missing an analyst. For real-world validation, provide an approved team configuration and review shift handovers, leaves, skill requirements, on-call support, rest breaks, and local labor requirements.
+
+## 🖥️ Interactive Studio
+
+The browser studio is deployed through GitHub Pages. It is **static and local-first**: edit sample assignments, inspect daily gap warnings, and export a CSV. No authentication, tracking, backend, or production employee data is required.
+
+If the live URL is unavailable, enable **Settings → Pages → Build and deployment → GitHub Actions** in this repository. The [deployment workflow](.github/workflows/pages.yml) publishes the `studio/` directory.
+
+## Python roster generator
 
 ```bash
 git clone https://github.com/amitambekar510/ShiftGuard-SOC-Roster-Management.git
 cd ShiftGuard-SOC-Roster-Management
 python -m pip install -r requirements.txt
-python shiftguard.py --year 2026 --month 10
+python shiftguard.py --year 2026 --month 10 --fail-on-gaps
 ```
 
-Output: `SOC_Roster_Validated.xlsx`.
+Output: `SOC_Roster_Validated.xlsx` (four sheets). The `--fail-on-gaps` flag exits with code 2 when any required shift is uncovered. See [the Python CLI](shiftguard.py) for configuration options.
 
-To flag insufficient coverage in automated runs:
+## 🔐 Privacy, limitations & responsible use
 
-```bash
-python shiftguard.py --year 2026 --month 10 --min-l1 1 --min-l2 1 --fail-on-gaps
-```
+- **Never publish real employee rosters or personal details** in this public repository.
+- Browser edits exist only in memory and reset on reload or month change; CSV files are downloaded locally.
+- The demo checks only simple L1/L2 staffing minimums and two illustrative rotation warnings. It does not model actual shift times, approved leave balances, jurisdiction-specific labor rules, overtime, skill matrices, or handover requirements.
+- The historical `generate_roster.py` remains as a legacy example; use `shiftguard.py` for corrected coverage checks.
+- Synthetic demonstration coverage gaps are expected and should be reviewed, not hidden or automatically treated as zero.
 
-Exit status **2** means one or more role/shift coverage gaps were found; inspect the **Coverage Gaps** sheet. The workbook is still written.
+## 🧪 Quality gates
 
-### Configure your own team
-Create a local JSON file (do **not** commit identifiable staff details to a public repository):
-
-```json
-[
-  {"name": "Analyst 01", "role": "SOC L1", "pattern": "rotating", "offset": 0},
-  {"name": "Analyst 02", "role": "SOC L2", "pattern": "rotating", "offset": 1},
-  {"name": "Shift Lead", "role": "Team Lead", "pattern": "weekday"}
-]
-```
-
-Use `--team team.json`. Optional member keys: `start` and `end` in `YYYY-MM-DD` format. All assignments anchor their cycle to **January 1, 2026**, so transitions between months do not reset the rotation. The year is configurable; holiday calendars and rest constraints are **not** automatically applied in v2.
-
-## 📦 Workbook layout
-- **SOC Roster:** names, roles, patterns, daily shift allocations.
-- **Coverage Gaps:** every unmet minimum for each date, role and shift.
-- **Shift Statistics:** per-person shift and off-day counts.
-- **Read Me:** limitations and interpretation.
-
-## 🧪 Tests
 ```bash
 python -m unittest discover -s tests -v
+node --check studio/app.js
+node studio/test.mjs
 ```
-GitHub Actions also runs the unit tests and exercises workbook generation.
 
-## ⚠️ Limitations and responsible use
-- ShiftGuard v2 does **not** ingest production HR systems or track approved leave, statutory holidays, skill eligibility, fatigue constraints, or overtime. Review these before adopting a roster.
-- The output is a planning aid, not a legal compliance certification or a substitute for managerial approval.
-- `generate_roster.py` is retained as a **legacy 2026 example**, including its hard-coded dates and historical logic. For corrected per-shift coverage checks and configurable monthly exports, use `shiftguard.py`.
-- Do not publish personnel records, schedules, names, contact details or confidential employment data in this public project.
+GitHub Actions validates the Python generator and browser studio. A passing test does **not** certify a production schedule.
 
-## 🔭 Roadmap
-Holiday calendars by jurisdiction, leave constraints, configurable staffing/skill matrices, maximum consecutive nights, minimum rest periods, and a private local web interface.
+## 📄 License & Maintainer
 
-## 👨‍💻 Maintainer
-[Amit Ambekar](https://github.com/amitambekar510) · [MIT license](LICENSE.txt)
+MIT · [LICENSE.txt](LICENSE.txt) · [Amit Ambekar](https://github.com/amitambekar510)
