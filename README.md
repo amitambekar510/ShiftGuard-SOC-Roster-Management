@@ -22,6 +22,35 @@
 <img src="assets/shiftguard-architecture.svg" alt="Local-first architecture diagram: inputs, scheduling, coverage engine, exports" width="100%">
 </div>
 
+## AI-ready: names and roles first
+
+Copy this prompt into an AI assistant that can read the repository and execute Python:
+
+```text
+Read AI_INSTRUCTIONS.md from the ShiftGuard-SOC-Roster-Management
+GitHub repository. First ask me for names and roles of General-shift
+priority staff, then names and roles of rotating SOC analysts.
+Confirm month and minimum L1/L2 coverage. Generate and review
+the Excel roster using ai_roster.py and disclose all coverage gaps.
+```
+
+Run the local guided wizard without an AI subscription:
+
+```bash
+python -m pip install -r requirements.txt
+python ai_roster.py
+```
+
+Or use synthetic example data:
+
+```bash
+python ai_roster.py --config examples/team.sample.json --fail-on-gaps
+```
+
+The wizard creates `ShiftGuard_AI_Roster.xlsx` and `ShiftGuard_Roster_Review.json`. It preserves General-shift priority, validates assigned L1/L2 coverage, and reports rest/rotation warnings. General shift assumes weekdays only. This is a planning heuristic, not a legal compliance or fatigue safety guarantee. Review results before adoption.
+
+[AI assistant instructions](AI_INSTRUCTIONS.md) · [Agent guidance](AGENTS.md) · [Sample team](examples/team.sample.json)
+
 ## 🚀 What's new in ShiftGuard 3.0?
 
 | Feature | Status |
