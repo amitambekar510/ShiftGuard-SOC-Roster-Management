@@ -1,0 +1,65 @@
+{
+  "year": 2026,
+  "month": 10,
+  "minimum_per_shift": {
+    "SOC L1": 1,
+    "SOC L2": 1
+  },
+  "analysts": [
+    {
+      "name": "Sample Lead",
+      "role": "Team Lead",
+      "priority": "general"
+    },
+    {
+      "name": "Sample L1 1",
+      "role": "SOC L1",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L1 2",
+      "role": "SOC L1",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L1 3",
+      "role": "SOC L1",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L1 4",
+      "role": "SOC L1",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L1 5",
+      "role": "SOC L1",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L2 1",
+      "role": "SOC L2",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L2 2",
+      "role": "SOC L2",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L2 3",
+      "role": "SOC L2",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L2 4",
+      "role": "SOC L2",
+      "priority": "soc"
+    },
+    {
+      "name": "Sample L2 5",
+      "role": "SOC L2",
+      "priority": "soc"
+    }
+  ]
+}
