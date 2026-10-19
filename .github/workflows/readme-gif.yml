@@ -1,7 +1,7 @@
-name: Generate README GIF
+name: Generate ShiftGuard 4.0 README GIF
 on:
   push:
-    branches: [feature/shiftguard-3-studio]
+    branches: [feature/shiftguard-4-branding]
     paths: ["scripts/generate_demo_gif.py", ".github/workflows/readme-gif.yml"]
   workflow_dispatch:
 permissions:

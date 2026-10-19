@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="assets/shiftguard-banner.svg" alt="ShiftGuard 3.0 SOC Workforce Command Center" width="100%">
+<img src="assets/shiftguard-banner.svg" alt="ShiftGuard 4.0 SOC Workforce Command Center" width="100%">
 
-### Interactive SOC Workforce Studio · Coverage Diagnostics · Local-first
+### AI-Ready SOC Workforce Studio · General-Shift Priority · Coverage Diagnostics · Local-first
 
 [![CI](https://github.com/amitambekar510/ShiftGuard-SOC-Roster-Management/actions/workflows/ci.yml/badge.svg)](https://github.com/amitambekar510/ShiftGuard-SOC-Roster-Management/actions/workflows/ci.yml)
-[![Studio](https://img.shields.io/badge/ShiftGuard-3.0-DFBA67?style=for-the-badge)](studio/)
+[![Studio](https://img.shields.io/badge/ShiftGuard-4.0-DFBA67?style=for-the-badge)](studio/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge)](shiftguard.py)
 
 **[Open the interactive studio](https://amitambekar510.github.io/ShiftGuard-SOC-Roster-Management/)** · [Python CLI](#python-roster-generator) · [Coverage explained](#what-does-a-coverage-gap-mean)
 
 </div>
 
-## 🎞️ Animated project walkthrough
+## 🎞️ ShiftGuard 4.0 — animated project walkthrough
 
 <div align="center">
 <img src="assets/shiftguard-demo.gif" alt="Animated synthetic demo of shift coverage, roster edits and diagnostics" width="100%">
@@ -22,7 +22,7 @@
 <img src="assets/shiftguard-architecture.svg" alt="Local-first architecture diagram: inputs, scheduling, coverage engine, exports" width="100%">
 </div>
 
-## AI-ready: names and roles first
+## 🤖 ShiftGuard 4.0 — AI-first roster creation
 
 Copy this prompt into an AI assistant that can read the repository and execute Python:
 
@@ -51,7 +51,7 @@ The wizard creates `ShiftGuard_AI_Roster.xlsx` and `ShiftGuard_Roster_Review.jso
 
 [AI assistant instructions](AI_INSTRUCTIONS.md) · [Agent guidance](AGENTS.md) · [Sample team](examples/team.sample.json)
 
-## 🚀 What's new in ShiftGuard 3.0?
+## 🚀 What's new in ShiftGuard 4.0?
 
 | Feature | Status |
 |---|---|

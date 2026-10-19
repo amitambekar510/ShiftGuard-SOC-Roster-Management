@@ -9,11 +9,11 @@ def font(n):
     p="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
     return ImageFont.truetype(p,n) if Path(p).exists() else ImageFont.load_default()
 frames=[]
-stages=[("01  REVIEW ROSTER","Morning / Afternoon / Night"),("02  ADJUST SHIFT","Click a cell to change assignment"),("03  CHECK COVERAGE","Flag a missing L1 night assignment"),("04  EXPORT PLAN","Download a local CSV for review")]
+stages=[("01  COLLECT NAMES + ROLES","General-shift priority comes first"),("02  PLAN SOC ROTATIONS","Assign Morning / Afternoon / Night"),("03  VALIDATE COVERAGE","Disclose uncovered role and shift slots"),("04  REVIEW + EXPORT","Excel, CSV and warning summary")]
 for step,(title,subtitle) in enumerate(stages):
     im=Image.new("RGB",(W,H),"#091226");d=ImageDraw.Draw(im)
     d.rounded_rectangle((20,20,980,400),radius=20,fill="#14263f",outline="#536b85",width=2)
-    d.text((45,45),"SHIFTGUARD 3.0  /  WORKFORCE STUDIO",font=font(26),fill="#e4c17a")
+    d.text((45,45),"SHIFTGUARD 4.0  /  AI-READY STUDIO",font=font(26),fill="#e4c17a")
     d.text((45,100),title,font=font(31),fill="white")
     d.text((45,149),subtitle,font=font(19),fill="#bacce0")
     for r in range(3):
